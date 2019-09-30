@@ -1,15 +1,35 @@
-const http = require('http');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const firebase = require('firebase');
+require('firebase/auth');
+require('firebase/database');
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
+const firebaseConfig = {
+  apiKey: "AIzaSyB6NrdAlM49vtfqzvtUTtfApjI1Qf2-7aA",
+  authDomain: "jawabdo-4a244.firebaseapp.com",
+  databaseURL: "https://jawabdo-4a244.firebaseio.com",
+  projectId: "jawabdo-4a244",
+  storageBucket: "",
+  messagingSenderId: "949766930175",
+  appId: "1:949766930175:web:ee63812174cb0a5ded56ca"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser')
+
+app.set('view engine', 'ejs');
+app.use(express.static('views'));
+app.set('views',__dirname + '/views');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.get('/',function (req,res) {
+
+  res.render('index');
+
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
-
+app.listen(3001);

@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/SarthakAditya/JawabDo/issues"
   },
-  "homepage": "https://github.com/SarthakAditya/JawabDo#readme"
+  "homepage": "https://github.com/SarthakAditya/JawabDo#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "firebase": "^7.0.0",
+    "nodemon": "^1.19.3"
+  }
 }
