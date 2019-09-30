@@ -1,0 +1,19 @@
+{
+  "name": "jawabdo",
+  "version": "1.0.0",
+  "description": "JawabDo web page for instructor",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SarthakAditya/JawabDo.git"
+  },
+  "author": "Group 19",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SarthakAditya/JawabDo/issues"
+  },
+  "homepage": "https://github.com/SarthakAditya/JawabDo#readme"
+}
