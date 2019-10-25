@@ -1,24 +1,17 @@
-
-const firebase = require('firebase');
-require('firebase/auth');
-require('firebase/database');
-
-const firebaseConfig = {
-  apiKey: "AIzaSyB6NrdAlM49vtfqzvtUTtfApjI1Qf2-7aA",
-  authDomain: "jawabdo-4a244.firebaseapp.com",
-  databaseURL: "https://jawabdo-4a244.firebaseio.com",
-  projectId: "jawabdo-4a244",
-  storageBucket: "",
-  messagingSenderId: "949766930175",
-  appId: "1:949766930175:web:ee63812174cb0a5ded56ca"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const admin = require('firebase-admin');
+const serviceAccount = require('./jawabdo-4a244-firebase-adminsdk-revog-315d7168bd');
+admin.initializeApp({
+      credential :  admin.credential.cert(serviceAccount),
+      databaseURL : 'https://jawabdo-4a244.firebaseio.com'
+    }
+);
+
+module.exports = admin;
+
+let token;
 
 app.set('view engine', 'ejs');
 app.use(express.static('views'));
@@ -26,10 +19,56 @@ app.set('views',__dirname + '/views');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+
 app.get('/',function (req,res) {
 
-  res.render('index');
+    res.render('index');
 
 });
 
-app.listen(3001);
+app.post('/remove', function(req, res) {
+    token = null;
+});
+
+app.get('/courses', function (req,res) {
+    if (token) {
+        admin.auth().verifyIdToken(token)
+            .then(function (decodedToken) {
+                let uid = decodedToken.uid;
+                const user = admin.database().ref('users/' + uid);
+                user.on('value', function (snapshot) {
+                    let Snapshot = snapshot;
+                    res.render('courses', {user: snapshot.val(), Snapshot : snapshot});
+                });
+            })
+            .catch(function (error) {
+                console.log("Error", error);
+            });
+    }
+    else
+        res.render('index');
+
+});
+
+app.post('/test', function (req,res) {
+    token = req.body.authorization;
+});
+
+app.get('/createquiz',function (req, res) {
+    if (token) {
+        admin.auth().verifyIdToken(token)
+            .then(function (decodedToken) {
+                let uid = decodedToken.uid;
+                const user = admin.database().ref('users/' + uid);
+                user.on('value', function (snapshot) {
+                    let Snapshot = snapshot;
+                    res.render('quiz', {user: snapshot.val(), Snapshot : snapshot});
+                });
+            })
+            .catch(function (error) {
+                console.log("Error", error);
+            });
+    }});
+
+
+app.listen(3000);

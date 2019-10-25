@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Courses List</title>
+    <link rel="stylesheet" type="text/css" href="css/courses.css">
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src = "js/firebaseAuth.js"></script>
+</head>
+<body>
+
+<div class="nav">
+    <button onclick=userSignout()><a href="/">SignOut</a></button>
+</div>
+
+<div>
+    <% Snapshot.forEach(function(key) {%>
+    <div class = "courses">
+        <div class="image">
+            <img src="assets/Images/c1.jpg">
+        </div>
+        <div class= "name">
+            <h1> Mobile Computing</h1>
+            <button><a href="/createquiz">Create Quiz</a></button>
+        </div>
+    </div>
+    <% })%>
+</div>
+
+</body>
+
+</html>
