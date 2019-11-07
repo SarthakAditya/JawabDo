@@ -8,28 +8,25 @@
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src = "js/firebaseAuth.js"></script>
+    <script src="js/addCourse.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/addcourse.css">
 </head>
 <body>
 
 <div class="nav">
     <button onclick=userSignout()><a href="/">SignOut</a></button>
-    <button><a href="/addcourse">Add Course</a></button>
+    <button><a href="/courses">Courses</a></button>
 </div>
 
-<div>
-    <% let i=0; %>
-    <% Snapshot.forEach(function(key) {%>
-    <div class = "courses">
-        <div class="image">
-            <img src="assets/Images/c1.jpg">
-        </div>
-        <div class= "name">
-            <h1><%= courses[i].Name %></h1>
-            <button><a href="/createquiz/<%= key.key %>">Create Quiz</a></button>
-        </div>
-        <% i++ %>
-    </div>
-    <% })%>
+<div class="c1">
+    <p>Questions</p>
+    <input type="text" id = "coursename" placeholder="Enter Course name">
+    <input type="text" id = "courseid" placeholder="Enter unique course ID">
+    <input type="text" id = "instructorname" placeholder="Enter Instructor name">
+</div>
+
+<div class="c2">
+    <button id = "Create" onclick="createCourse()">Create</button>
 </div>
 
 </body>

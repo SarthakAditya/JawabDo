@@ -2,40 +2,64 @@
 <html>
 <head>
     <title>Create Quiz</title>
-    <link rel="stylesheet" type="text/css" href="./css/quiz.css">
-    <script src="./js/quiz.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../css/quiz.css">
+    <script src="./../js/quiz.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src = "js/firebaseAuth.js"></script>
+    <script src = "./../js/firebaseAuth.js"></script>
 </head>
+
+<script type="text/javascript">
+    var datefield=document.createElement("input");
+    datefield.setAttribute("type", "date");
+    if (datefield.type!="date"){ //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+        document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
+        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n')
+    }
+</script>
+
+<script>
+    if (datefield.type!="date"){ //if browser doesn't support input type="date", initialize date picker widget:
+        jQuery(function($){ //on document.ready
+            $('#date1').datepicker();
+        })
+    }
+</script>
+
 <body>
 <div class="nav">
     <button onclick=userSignout()><a href="/">SignOut</a></button>
+    <button><a href="/courses">Courses</a></button>
 </div>
+<div id="maind">
+    <div class="c1">
+        <p>Questions</p>
+        <input type="text" id = "ques" placeholder="Enter Question">
+        <input type="text" id = "opt1" placeholder="Option 1">
+        <input type="text" id = "opt2" placeholder="Option 2">
+        <input type="text" id = "opt3" placeholder="Option 3">
+        <input type="text" id = "opt4" placeholder="Option 4">
+        <input type="text" id = "opt5" placeholder="Correct Option (enter number only)">
+    </div>
 
-<div class="c1">
-    <p>Questions</p>
-    <input type="text" id = "ques" placeholder="Enter Question">
-    <input type="text" id = "opt1" placeholder="Option 1">
-    <input type="text" id = "opt2" placeholder="Option 2">
-    <input type="text" id = "opt3" placeholder="Option 3">
-    <input type="text" id = "opt4" placeholder="Option 4">
-    <input type="text" id = "opt5" placeholder="Correct Option (enter number only)">
-</div>
+    <div class="c2">
+        <button id = "quess" onclick="add()">Add Question</button>
+    </div>
 
-<div class="c2">
-    <button id = "quess" onclick="add()">Add Question</button>
-</div>
+    <div class="c1">
+        <p>Enter Date Time and Duration</p>
+        Date : <input id="date1" name="date1" required="required" type="date" value="MM/DD/YYYY"/> <br/>
+        Hour : <input type="text" id = "HOUR" placeholder="24 Hour format"> <br/>
+        Minutes : <input type="text" id = "Minute" placeholder="Enter Minutes"> <br/>
+        Duration : <input type="text" id = "Duration" placeholder="Enter in Minutes"> <br/>
+    </div>
 
-<div class="c1">
-    <p>Enter Time</p>
-    <input type="datetime-local" id ="qtime">
-</div>
-
-<div class="c2">
-    <button id = "Create" onclick="createQuiz()">Create</button>
+    <div class="c2">
+        <button id = "Create" onclick="createQuiz()">Create</button>
+    </div>
 </div>
 
 </body>

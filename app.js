@@ -9,9 +9,16 @@ admin.initializeApp({
     }
 );
 
+const messaging = admin.messaging;
+
+const topic = 'XYZ';
+
 module.exports = admin;
 
 let token;
+
+let courses;
+
 
 app.set('view engine', 'ejs');
 app.use(express.static('views'));
@@ -30,15 +37,28 @@ app.post('/remove', function(req, res) {
     token = null;
 });
 
-app.get('/courses', function (req,res) {
+app.get('/courses',async function (req,res) {
+
+    admin.database().ref('Courses/').on('value',function (snapshot) {
+        courses = snapshot.val();
+    });
+
     if (token) {
         admin.auth().verifyIdToken(token)
             .then(function (decodedToken) {
+                let regcourses = [];
                 let uid = decodedToken.uid;
-                const user = admin.database().ref('users/' + uid);
+                const user = admin.database().ref('Users/' + uid);
                 user.on('value', function (snapshot) {
-                    let Snapshot = snapshot;
-                    res.render('courses', {user: snapshot.val(), Snapshot : snapshot});
+                    let usercrs = snapshot.child('Courses');
+                    if (usercrs.val())
+                    {
+                        let keys = Object.keys(usercrs.val());
+                        keys.forEach(function(key){
+                            regcourses.push(courses[key]);
+                        });
+                    }
+                    res.render('courses', {courses: regcourses, Snapshot : usercrs});
                 });
             })
             .catch(function (error) {
@@ -54,21 +74,40 @@ app.post('/test', function (req,res) {
     token = req.body.authorization;
 });
 
-app.get('/createquiz',function (req, res) {
+app.get('/createquiz/:id',function (req, res) {
+    let key = req.params.id;
+    let course;
     if (token) {
         admin.auth().verifyIdToken(token)
             .then(function (decodedToken) {
                 let uid = decodedToken.uid;
-                const user = admin.database().ref('users/' + uid);
+                const user = admin.database().ref('Users/' + uid);
                 user.on('value', function (snapshot) {
-                    let Snapshot = snapshot;
-                    res.render('quiz', {user: snapshot.val(), Snapshot : snapshot});
+                    course = courses[key];
+                    res.render('quiz', {user: snapshot.val(), course : course});
                 });
             })
             .catch(function (error) {
                 console.log("Error", error);
             });
     }});
+
+
+app.get('/addcourse',function (req,res) {
+    if (token) {
+        admin.auth().verifyIdToken(token)
+            .then(function (decodedToken) {
+                let uid = decodedToken.uid;
+                const user = admin.database().ref('Users/' + uid);
+                user.on('value', function (snapshot) {
+                    res.render('addcourse');
+                });
+            })
+            .catch(function (error) {
+                console.log("Error", error);
+            });
+    }
+});
 
 
 app.listen(3000);

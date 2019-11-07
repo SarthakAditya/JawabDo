@@ -2,21 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6230eda-1977-4430-b7bb-0e4d3973dd65" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/middlewares/authCheck.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/serverRouteHandler.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/courses.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/css/courses.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/css/login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/css/quiz.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/js/courses.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/js/firebaseAuth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/js/quiz.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/quiz.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/css/addcourse.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/js/addCourse.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/js/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/courses.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/courses.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/js/courses.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/addcourse.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/js/firebaseAuth.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/js/firebaseAuth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/js/quiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/js/quiz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/quiz.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/quiz.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,6 +101,13 @@
       <workItem from="1570166536020" duration="649000" />
       <workItem from="1571605207676" duration="18675000" />
       <workItem from="1571722329834" duration="333000" />
+      <workItem from="1572508947405" duration="415000" />
+      <workItem from="1572680086641" duration="67000" />
+      <workItem from="1572680404133" duration="31050000" />
+      <workItem from="1572724817397" duration="100000" />
+      <workItem from="1572961535829" duration="13573000" />
+      <workItem from="1573107090217" duration="3404000" />
+      <workItem from="1573118749118" duration="1181000" />
     </task>
     <servers />
   </component>

@@ -1,7 +1,7 @@
 var n_q = 0 ;
 var ques = [] ;
 var o1 = [] , o2 = [] , o3 = [] , o4 = [] , c = [] ;
-let test =[];
+let test=[];
 
 function add(){
     n_q++ ;
@@ -21,20 +21,45 @@ function add(){
 }
 
 function createQuiz() {
-    // Insert all the questions in firebase database with the auth variable and go back to home page
-    var i = 0 ;
-    for(i = 0 ;  i < n_q ; ++i){
-        console.log("Q" +(i + 1) + " " + ques[i]) ;
-        console.log("1. " + " " + o1[i]) ;
-        console.log("2. " + " " + o2[i]) ;
-        console.log("3. " + " " + o3[i]) ;
-        console.log("4. " + " " + o4[i]) ;
-        console.log("Correct Option" + " "+c);
-        test = {Qestions : ques, Answers : c};
-    }
-    let database = firebase.database();
-    let uid = firebase.auth().currentUser.uid;
-    let userRef = database.ref('/users'+'/'+uid + '/Mobile_Computing');
-    userRef.push(test);
-}
+    let dateInput = document.getElementById("date1").value;
+    let date = dateInput.split("/");
+    let Month = date[0];
+    let Date = date[1];
+    let Year = date[2];
 
+    let Hour = document.getElementById("HOUR").value;
+    let Minutes = document.getElementById("Minute").value;
+    let Duration = document.getElementById("Duration").value;
+
+    let url = String(window.location.href);
+    let ress = url.split("/");
+    let course = ress[ress.length-1];
+    var i;
+    let database = firebase.database();
+    let userRef = database.ref('Courses/'+ course + '/Tests');
+    let testTime = database.ref('Courses/'+ course + '/Time');
+    for(i = 1 ;  i <= n_q ; ++i){
+        userRef.update({
+            [(i-1)*6+1] : ques[i-1],
+            [(i-1)*6+2] : o1[i-1],
+            [(i-1)*6+3] : o2[i-1],
+            [(i-1)*6+4] : o3[i-1],
+            [(i-1)*6+5] : o4[i-1],
+            [(i-1)*6+6] : c[i-1]
+        });
+    }
+
+    testTime.set({
+       Date : Date,
+       Duration : Duration,
+       HRS : Hour,
+       MINS : Minutes,
+       Month : Month
+    });
+
+    let delayInMilliseconds = 6000; //6 second
+
+    setTimeout(function() {
+        window.location.assign('/courses')
+    }, delayInMilliseconds);
+}
