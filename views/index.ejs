@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -14,20 +15,24 @@
 <body>
 
 <h2>Jawabdo Instructor Login Page</h2>
-
-<div class="container">
+<div class="login-form">
     <label id="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Email Id" id="uemail" required>
+    <div class="input-box">
+        <input type="text" placeholder="Enter Email Id" id="uemail" required>
+        <span><i class="fa fa-user" aria-hidden="true" id="usericon"></i></span>
+    </div>
 
     <label for="psw" id="pwd"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" id="psw" required>
+    <div class="input-box">
+        <input type="password" placeholder="Enter Password" id="psw" required>
+        <span><i class="fa fa-lock" aria-hidden="true" id="passwordicon"></i></span>
+    </div>
 
     <button id="login" onclick="userLogin()">Login</button>
     <button id="signup" onclick="userSignup()">Signup</button>
     <button id="signgoogle" onclick="signInWithGoogle()">Sign in with Google</button>
     <button id="gotoCourses"><a href="/courses">Courses</a></button>
     <button id="signout" onclick="userSignout()">Signout</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
 </div>
 </body>
 </html>

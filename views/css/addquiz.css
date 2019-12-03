@@ -1,24 +1,25 @@
-.nav{
-    background-color: #4CAF50 ;
-    overflow: hidden;
-    margin-left: 50px ;
-    margin-top: 25px ;
-    width: 90%;
-    border-radius: 5px ;
+.head{
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center ;
+    font-family: Arial ;
+
 }
 
-.nav a {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    text-decoration: none ;
-    padding: 14px 16px;
+*{
+    padding: 0px ;
+    margin: 0px ;
 }
 
-.nav a:hover{
-    color: white ;
-    background-color: #696969 ;
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    place-content: center;
+}
+
+#maind{
+    margin-top: 5%;
 }
 
 .c1{

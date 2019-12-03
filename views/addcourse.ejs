@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Courses List</title>
-    <link rel="stylesheet" type="text/css" href="css/courses.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
@@ -14,21 +14,25 @@
 <body>
 
 <div class="nav">
-    <button onclick=userSignout()><a href="/">SignOut</a></button>
-    <button><a href="/courses">Courses</a></button>
+    <ul>
+        <li><a href="/" onclick="return userSignout()">SignOut</a></li>
+        <li><a href="/courses">Courses</a></li>
+    </ul>
 </div>
 
 <div class="c1">
-    <p>Questions</p>
+    <p>Course Details</p>
     <input type="text" id = "coursename" placeholder="Enter Course name">
     <input type="text" id = "courseid" placeholder="Enter unique course ID">
     <input type="text" id = "instructorname" placeholder="Enter Instructor name">
-</div>
 
-<div class="c2">
-    <button id = "Create" onclick="createCourse()">Create</button>
-</div>
 
+    <div class="c2">
+        <button id = "Create" onclick="createCourse()">Create</button>
+    </div>
+
+
+</div>
 </body>
 
 </html>

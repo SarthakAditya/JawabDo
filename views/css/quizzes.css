@@ -1,0 +1,46 @@
+.head{
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center ;
+    font-family: Arial ;
+
+}
+
+*{
+    padding: 0px ;
+    margin: 0px ;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.courbody{
+    margin: 5%;
+}
+
+.courses{
+    margin: 25px;
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows:80px;
+    grid-template-areas: "name";
+    border-radius: 18px;
+    background-color: white;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+    text-align: center;
+    float: left;
+    cursor: pointer;
+}
+
+.courses a:visited,a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.name{
+    margin-top: 20px;
+    grid-area: name;
+}

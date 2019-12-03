@@ -44,6 +44,12 @@ function checkIfloggedIn() {
                                 {
                                         addUser();
 
+                                        var usericon = document.getElementById("usericon");
+                                        usericon.setAttribute('style', 'display : none ; visibility : hidden');
+
+                                        var passwordicon = document.getElementById("passwordicon");
+                                        passwordicon.setAttribute('style', 'display : none ; visibility : hidden');
+
                                         var login_u = document.getElementById("uname");
                                         login_u.setAttribute('style', 'display : none ; visibility : hidden');
 
@@ -87,6 +93,12 @@ function checkIfloggedIn() {
                 else {
                         axios.post('/remove');
                         console.log('Not log in') ;
+
+                        var usericon = document.getElementById("usericon");
+                        usericon.setAttribute('style', 'display : block ; visibility : visible');
+
+                        var passwordicon = document.getElementById("passwordicon");
+                        passwordicon.setAttribute('style', 'display : block ; visibility : visible');
 
                         var login_u = document.getElementById("uname");
                         login_u.setAttribute('style', 'display : block ; visibility : visible');

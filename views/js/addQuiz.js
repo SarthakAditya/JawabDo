@@ -38,28 +38,45 @@ function createQuiz() {
     let database = firebase.database();
     let userRef = database.ref('Courses/'+ course + '/Tests');
     let testTime = database.ref('Courses/'+ course + '/Time');
-    for(i = 1 ;  i <= n_q ; ++i){
-        userRef.update({
-            [(i-1)*6+1] : ques[i-1],
-            [(i-1)*6+2] : o1[i-1],
-            [(i-1)*6+3] : o2[i-1],
-            [(i-1)*6+4] : o3[i-1],
-            [(i-1)*6+5] : o4[i-1],
-            [(i-1)*6+6] : c[i-1]
+
+    userRef.once('value').then(function (snapshot) {
+
+        console.log(snapshot.numChildren());
+        let testno = snapshot.numChildren();
+
+        while (snapshot.hasChild("test"+testno))
+        {
+            testno = testno + 1;
+            testno = testno.toString();
+        }
+
+        let newTestRef = database.ref('Courses/'+ course + '/Tests/' + 'test' + testno);
+        let newTestTime = database.ref('Courses/'+ course + '/Time/' + 'test' + testno);
+
+        for(i = 1 ;  i <= n_q ; ++i){
+            newTestRef.update({
+                [(i-1)*6+1] : ques[i-1],
+                [(i-1)*6+2] : o1[i-1],
+                [(i-1)*6+3] : o2[i-1],
+                [(i-1)*6+4] : o3[i-1],
+                [(i-1)*6+5] : o4[i-1],
+                [(i-1)*6+6] : c[i-1]
+            });
+        }
+
+        newTestTime.set({
+            Date : Date,
+            Duration : Duration,
+            HRS : Hour,
+            MINS : Minutes,
+            Month : Month
         });
-    }
 
-    testTime.set({
-       Date : Date,
-       Duration : Duration,
-       HRS : Hour,
-       MINS : Minutes,
-       Month : Month
+        let delayInMilliseconds = 6000; //6 second
+
+        setTimeout(function() {
+            window.location.assign('/courses')
+        }, delayInMilliseconds);
+
     });
-
-    let delayInMilliseconds = 6000; //6 second
-
-    setTimeout(function() {
-        window.location.assign('/courses')
-    }, delayInMilliseconds);
 }

@@ -47,6 +47,8 @@ app.get('/courses',async function (req,res) {
         admin.auth().verifyIdToken(token)
             .then(function (decodedToken) {
                 let regcourses = [];
+                let sList =[];
+                let Students = [];
                 let uid = decodedToken.uid;
                 const user = admin.database().ref('Users/' + uid);
                 user.on('value', function (snapshot) {
@@ -56,9 +58,25 @@ app.get('/courses',async function (req,res) {
                         let keys = Object.keys(usercrs.val());
                         keys.forEach(function(key){
                             regcourses.push(courses[key]);
+                            sList.push(courses[key].Students);
                         });
                     }
-                    res.render('courses', {courses: regcourses, Snapshot : usercrs});
+                    if (sList)
+                    {
+                        for (let i=0; i<sList.length;i++)
+                        {
+                            let count = 0;
+                            if (sList[i])
+                            {
+                                let keys = Object.keys(sList[i]);
+                                keys.forEach(function(key){
+                                    count++
+                                });
+                            }
+                            Students.push(count)
+                        }
+                    }
+                    res.render('courses', {courses: regcourses,Students : Students, Snapshot : usercrs});
                 });
             })
             .catch(function (error) {
@@ -84,7 +102,32 @@ app.get('/createquiz/:id',function (req, res) {
                 const user = admin.database().ref('Users/' + uid);
                 user.on('value', function (snapshot) {
                     course = courses[key];
-                    res.render('quiz', {user: snapshot.val(), course : course});
+                    res.render('addquiz', {user: snapshot.val(), course : course});
+                });
+            })
+            .catch(function (error) {
+                console.log("Error", error);
+            });
+    }});
+
+
+app.get('/quizlist/:id',function (req, res) {
+    let key = req.params.id;
+    let quizzes=[];
+    if (token) {
+        admin.auth().verifyIdToken(token)
+            .then(function (decodedToken) {
+                let uid = decodedToken.uid;
+                const user = admin.database().ref('Courses/' + key + '/Tests');
+                user.on('value', function (snapshot) {
+                    if (snapshot.val())
+                    {
+                        let keys = Object.keys(snapshot.val());
+                        keys.forEach(function(key){
+                            quizzes.push(key)
+                        });
+                    }
+                    res.render('quizzes', {Quizzes: quizzes, Snapshot : snapshot, Qid : key});
                 });
             })
             .catch(function (error) {
@@ -108,6 +151,38 @@ app.get('/addcourse',function (req,res) {
             });
     }
 });
+
+app.get('/quizData/:id',function (req, res) {
+    let id = req.params.id;
+    let cid = id.split("+");
+    let students=[];
+    let marks=[];
+    let mean=0;let max=0;
+    if (token) {
+        admin.auth().verifyIdToken(token)
+            .then(function (decodedToken) {
+                let uid = decodedToken.uid;
+                const user = admin.database().ref('Users/' + uid + '/Courses/' + cid[0] + '/' + cid[1]);
+                user.on('value', function (snapshot) {
+                    if (snapshot.val())
+                    {
+                        let keys = Object.keys(snapshot.val());
+                        keys.forEach(function(key){
+                            students.push(key);
+                            marks.push(snapshot.child(key).val());
+                            if (snapshot.child(key).val() > max)
+                                max = snapshot.child(key).val();
+                            mean = mean + snapshot.child(key).val();
+                        });
+                        mean = mean/marks.length;
+                    }
+                    res.render('quizresults', {Students: students, Marks : marks, Mean : mean, Max : max, Snapshot : snapshot});
+                });
+            })
+            .catch(function (error) {
+                console.log("Error", error);
+            });
+    }});
 
 
 app.listen(3000);

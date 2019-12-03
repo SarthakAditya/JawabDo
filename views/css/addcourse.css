@@ -2,3 +2,55 @@
     display: none;
     visibility: hidden;
 }
+
+.head{
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center ;
+    font-family: Arial ;
+
+}
+
+*{
+    padding: 0px ;
+    margin: 0px ;
+}
+
+.c1{
+    margin: 5%;
+    text-align: center;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    place-content: center;
+}
+
+label{
+    margin: 15px;
+}
+
+input[type = text], input[type = password] {
+    width: 100%;
+    padding: 12px 30px;
+    margin: 8px 0 30px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+
+}
+
+button {
+    background-color: #4CAF50;
+    color: black;
+    padding: 14px 20px;
+    display: block;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    outline: none;
+    margin-top: 20px;
+    border-radius: 20px;
+}

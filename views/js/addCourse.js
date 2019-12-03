@@ -21,7 +21,7 @@ function createCourse() {
     let instname = document.getElementById("instructorname").value;
     let cuid = document.getElementById("courseid").value;
 
-    let delayInMilliseconds = 6000; //6 second
+    let delayInMilliseconds = 3000; //6 second
 
     let database = firebase.database();
     let courseAdd = 'Courses/';
@@ -70,6 +70,7 @@ function createCourse() {
             });
 
             setTimeout(function() {
+                window.location.assign('/courses')
             }, delayInMilliseconds);
 
             console.log("Course Created");
